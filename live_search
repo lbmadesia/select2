@@ -1,3 +1,15 @@
+******************************laravel paginator*********************************************************************************************************
+    $products = Product::where('slug','like','%'.$text.'%')->paginate(10);
+        
+  if (count($products) > 0) {
+            return response()->json(['items' => $products->toArray()['data'], 'pagination' => $products->nextPageUrl() ? true : false]);
+        }
+        return response()->json(['items' => [], 'pagination' => false]);
+    
+     
+  ************************select2 ajax****************************************************************************************************************
+     
+     
      $('#products').select2({
         
             ajax: {
