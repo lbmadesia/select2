@@ -1,0 +1,31 @@
+     $('#products').select2({
+        
+            ajax: {
+                url: "{{ route('custom-price.show','products') }}",
+                data: function (params) {
+                    console.log(params);
+                    return {
+                        search: params.term,
+                        target:$("#target").val(),
+                        websiteType:$("#websiteType").val(),
+                        WebsiteId:$("#WebsiteId").val(),
+                        page: params.page || 1
+                    };
+                },
+                dataType: 'json',
+                processResults: function (data) {
+                    data.page = data.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: data.pagination
+                        }
+                    }
+                },
+                cache: true,
+                delay: 250
+            },
+                placeholder: 'Search for a product',
+                minimumInputLength: 2,
+                multiple: true
+            });
